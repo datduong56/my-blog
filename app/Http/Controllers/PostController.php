@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Repositories\Eloquent\PostRepository;
+use App\Repositories\Interface\PostInterface;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     protected $postRepository;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostInterface $postRepository)
     {
         $this->postRepository = $postRepository;
     }

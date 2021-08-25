@@ -15,7 +15,13 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+            $table->string('title', 200);
+            $table->string('summary');
+            $table->string('thumbnail');
+            $table->text('content');
+            $table->timestampsTz();
         });
     }
 

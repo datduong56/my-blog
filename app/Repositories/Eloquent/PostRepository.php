@@ -3,16 +3,17 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Post;
+use App\Repositories\Interface\PostInterface;
 
-class PostRepository
+class PostRepository implements PostInterface
 {
     public function getAll()
     {
-        return Post::orderBy('views_count', 'desc')->all();
+        return Post::all();
     }
 
     public function find($id)
     {
-        return Post::firstOrFail(['hash_id' => $id]);
+        return Post::find($id);
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\v1;
 
+use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Repositories\Interface\PostInterface;
 use Illuminate\Http\Request;
@@ -15,9 +16,13 @@ class PostController extends Controller
         $this->postRepository = $postRepository;
     }
 
-
-
     /**
+     * @OA\Get(
+     *  path="/api/v1/post",
+     *  description="Test",
+     *  @OA\Response(response="default", description="Welcome page")
+     * )
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

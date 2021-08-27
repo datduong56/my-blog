@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Repositories\Interface\PostInterface;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
 
 class PostController extends Controller
 {
@@ -19,8 +20,15 @@ class PostController extends Controller
     /**
      * @OA\Get(
      *  path="/api/v1/post",
-     *  description="Test",
-     *  @OA\Response(response="default", description="Welcome page")
+     *  operationId="listPost",
+     *  tags={"Post"},
+     *  summary="Get list post",
+     *  description="Return list of post",
+     *  @OA\Response(
+     *      response=200,
+     *      description="Successful",
+     *      @OA\JsonContent(ref="#/components/schemas/PostResource")
+     *  )
      * )
      *
      * Display a listing of the resource.
@@ -30,7 +38,7 @@ class PostController extends Controller
     public function index()
     {
         $post = $this->postRepository->getAll();
-        return $post;
+        return new PostResource($post);
     }
 
     /**

@@ -17,12 +17,86 @@
     "paths": {
         "/api/v1/post": {
             "get": {
-                "description": "Test",
-                "operationId": "02c161c0877ec3592d196acb7f33f1f8",
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get list post",
+                "description": "Return list of post",
+                "operationId": "listPost",
                 "responses": {
-                    "default": {
-                        "description": "Welcome page"
+                    "200": {
+                        "description": "Successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostResource"
+                                }
+                            }
+                        }
                     }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Post": {
+                "title": "Post",
+                "description": "Post model",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "A nice post"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "This is a content of post"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2021-08-26T14:24:23.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2021-08-26T14:24:23.000000Z"
+                    },
+                    "thumbnail": {
+                        "type": "string",
+                        "example": "https://via.placeholder.com/1080x1080.png/000055?text=cats+voluptate"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "example": "This is a summary post"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Post"
+                }
+            },
+            "PostResource": {
+                "title": "PostResource",
+                "description": "Post resource",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Post"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "PostResource"
                 }
             }
         }

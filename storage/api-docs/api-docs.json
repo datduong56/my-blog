@@ -36,6 +36,41 @@
                     }
                 }
             }
+        },
+        "/api/v1/post/{id}": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get post detail",
+                "description": "Return post detail",
+                "operationId": "getPostDetail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Post"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -87,7 +122,6 @@
                 "properties": {
                     "data": {
                         "title": "data",
-                        "description": "Data wrapper",
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Post"

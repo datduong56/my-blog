@@ -63,6 +63,29 @@ class PostController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *  path="/api/v1/post/{id}",
+     *  operationId="getPostDetail",
+     *  tags={"Post"},
+     *  summary="Get post detail",
+     *  description="Return post detail",
+     *  @OA\Parameter(
+     *      name="id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(type="integer")
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success",
+     *      @OA\JsonContent(ref="#/components/schemas/Post")
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="Bad Request"
+     *  )
+     * )
+     *
      * Display the specified resource.
      *
      * @param  \App\Models\Post  $post
@@ -70,8 +93,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = $this->postRepository->find($id);
-        return $post;
+        return $this->postRepository->find($id);
     }
 
     /**

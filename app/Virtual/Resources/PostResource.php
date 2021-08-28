@@ -12,10 +12,7 @@ namespace App\Virtual\Resources;
 class PostResource
 {
   /**
-   * @OA\Property(
-   *     title="data",
-   *     description="Data wrapper"
-   * )
+   * @OA\Property(title="data")
    *
    * @var \App\Virtual\Models\Post[]
    */

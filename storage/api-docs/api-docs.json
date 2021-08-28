@@ -67,7 +67,34 @@
                         }
                     },
                     "404": {
-                        "description": "Bad Request"
+                        "description": "Not found post"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Delete post",
+                "description": "Delete any post you want",
+                "operationId": "deletePost",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Post id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted post"
+                    },
+                    "404": {
+                        "description": "Not found post"
                     }
                 }
             }

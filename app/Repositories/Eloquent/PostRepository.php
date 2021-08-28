@@ -21,4 +21,14 @@ class PostRepository implements PostInterface
         }
         return $post;
     }
+
+    public function delete($id)
+    {
+        $post = Post::find($id);
+        if (is_null($post)) {
+            return response()->json(['message' => 'Not found post'], Response::HTTP_NOT_FOUND);
+        }
+        $post->delete();
+        return response('', Response::HTTP_NO_CONTENT);
+    }
 }

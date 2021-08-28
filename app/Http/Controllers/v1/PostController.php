@@ -42,16 +42,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -82,29 +72,18 @@ class PostController extends Controller
      *  ),
      *  @OA\Response(
      *      response=404,
-     *      description="Bad Request"
+     *      description="Not found post"
      *  )
      * )
      *
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  integer $idPost
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idPost)
     {
-        return $this->postRepository->find($id);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
+        return $this->postRepository->find($idPost);
     }
 
     /**
@@ -120,13 +99,36 @@ class PostController extends Controller
     }
 
     /**
+     * @OA\Delete(
+     *  path="/api/v1/post/{id}",
+     *  operationId="deletePost",
+     *  tags={"Post"},
+     *  summary="Delete post",
+     *  description="Delete any post you want",
+     *  @OA\Parameter(
+     *      name="id",
+     *      description="Post id",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(type="integer")
+     *  ),
+     *  @OA\Response(
+     *      response=204,
+     *      description="Deleted post",
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="Not found post",
+     *  )
+     * )
+     *
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param integer $idPost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($idPost)
     {
-        //
+        return $this->postRepository->delete($idPost);
     }
 }

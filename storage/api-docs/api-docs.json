@@ -35,6 +35,39 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Store a new post",
+                "description": "Return a new post created",
+                "operationId": "storePost",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Store a new post successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Post"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Bad request"
+                    }
+                }
             }
         },
         "/api/v1/post/{id}": {
@@ -141,6 +174,37 @@
                 "type": "object",
                 "xml": {
                     "name": "Post"
+                }
+            },
+            "StorePostRequest": {
+                "title": "Store post request",
+                "description": "Store post request body data",
+                "required": [
+                    "title",
+                    "summary",
+                    "content"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "A nice post title"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "example": "This is new summary on post"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "This is nice post content"
+                    },
+                    "thumbnail": {
+                        "type": "string",
+                        "example": "https://via.placeholder.com/1080x1080.png/000055?text=cats+voluptate"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "StorePostRequest"
                 }
             },
             "PostResource": {

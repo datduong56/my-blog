@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StorePostRequest;
 use App\Models\Post;
 use App\Repositories\Interface\PostInterface;
 use Illuminate\Http\Request;
@@ -42,14 +43,35 @@ class PostController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *  path="/api/v1/post",
+     *  operationId="storePost",
+     *  tags={"Post"},
+     *  summary="Store a new post",
+     *  description="Return a new post created",
+     *  @OA\RequestBody(
+     *      required=true,
+     *      @OA\JsonContent(ref="#/components/schemas/StorePostRequest")
+     *  ),
+     *  @OA\Response(
+     *      response=201,
+     *      description="Store a new post successful",
+     *      @OA\JsonContent(ref="#/components/schemas/Post")
+     *  ),
+     *  @OA\Response(
+     *      response=422,
+     *      description="Bad request"
+     *  ),
+     * )
+     *
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request\StorePostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        return $this->postRepository->create($request);
     }
 
     /**

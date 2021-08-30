@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Http\Requests\Post\StorePostRequest;
 use App\Models\Post;
 use App\Repositories\Interface\PostInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,5 +31,11 @@ class PostRepository implements PostInterface
         }
         $post->delete();
         return response('', Response::HTTP_NO_CONTENT);
+    }
+
+    public function create(StorePostRequest $request)
+    {
+        $post = Post::create($request->validated());
+        return $post;
     }
 }

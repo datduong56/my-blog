@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->collation = 'utf8mb4_unicode_ci';
             $table->string('title', 200);
             $table->string('summary');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->text('content');
             $table->timestampsTz();
         });

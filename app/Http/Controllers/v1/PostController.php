@@ -59,7 +59,7 @@ class PostController extends Controller
      *      @OA\JsonContent(ref="#/components/schemas/Post")
      *  ),
      *  @OA\Response(
-     *      response=422,
+     *      response=400,
      *      description="Bad request"
      *  ),
      * )

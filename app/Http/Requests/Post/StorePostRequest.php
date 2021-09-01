@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests\Post;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class StorePostRequest extends FormRequest
 {
@@ -45,5 +46,20 @@ class StorePostRequest extends FormRequest
             'summary.required' => 'Please add a nice summary for the post.',
             'thumbnail.url' => 'Thumbnail must be image link.'
         ];
+    }
+
+    /**
+     * Custom message response when validation failed
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function failedValidation(Validator $validator)
+    {
+        $response = response()->json([
+            'message' => 'Bad Request',
+            'errors' => $validator->errors()->messages(),
+        ], 400);
+
+        throw new ValidationException($validator, $response);
     }
 }

@@ -4,9 +4,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
-use App\Models\Post;
 use App\Repositories\Interface\PostInterface;
-use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 
 class PostController extends Controller
@@ -38,8 +36,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = $this->postRepository->getAll();
-        return new PostResource($post);
+        return $this->postRepository->getAll();
     }
 
     /**
@@ -76,13 +73,13 @@ class PostController extends Controller
 
     /**
      * @OA\Get(
-     *  path="/api/v1/post/{id}",
+     *  path="/api/v1/post/{postId}",
      *  operationId="getPostDetail",
      *  tags={"Post"},
      *  summary="Get post detail",
      *  description="Return post detail",
      *  @OA\Parameter(
-     *      name="id",
+     *      name="postId",
      *      required=true,
      *      in="path",
      *      @OA\Schema(type="integer")
@@ -100,35 +97,67 @@ class PostController extends Controller
      *
      * Display the specified resource.
      *
-     * @param  integer $idPost
+     * @param  integer $postId
      * @return \Illuminate\Http\Response
      */
-    public function show($idPost)
+    public function show($postId)
     {
-        return $this->postRepository->find($idPost);
+        return $this->postRepository->find($postId);
     }
 
     /**
+     * @OA\Put(
+     *  path="/api/v1/post/{postId}",
+     *  operationId="updatePostDetail",
+     *  tags={"Post"},
+     *  summary="Update post detail",
+     *  description="Return a updated post detail",
+     *  @OA\Parameter(
+     *      name="postId",
+     *      required=true,
+     *      in="path",
+     *      @OA\Schema(type="integer")
+     *  ),
+     *  @OA\RequestBody(
+     *      required=true,
+     *      description="Updated user object",
+     *      @OA\JsonContent(ref="#/components/schemas/StorePostRequest")
+     *  ),
+     *  @OA\Response(
+     *      response=202,
+     *      description="Updated post",
+     *      @OA\JsonContent(ref="#/components/schemas/Post")
+     *  ),
+     *  @OA\Response(
+     *      response=400,
+     *      description="Bad request"
+     *  ),
+     *  @OA\Response(
+     *      response=404,
+     *      description="Not found post"
+     *  )
+     * )
+     *
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \Illuminate\Http\Request\StorePostRequest  $request
+     * @param  integer $postId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update($postId, StorePostRequest $request)
     {
-        //
+        return $this->postRepository->update($request, $postId);
     }
 
     /**
      * @OA\Delete(
-     *  path="/api/v1/post/{id}",
+     *  path="/api/v1/post/{postId}",
      *  operationId="deletePost",
      *  tags={"Post"},
      *  summary="Delete post",
      *  description="Delete any post you want",
      *  @OA\Parameter(
-     *      name="id",
+     *      name="postId",
      *      description="Post id",
      *      required=true,
      *      in="path",

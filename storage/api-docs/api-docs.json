@@ -64,13 +64,13 @@
                             }
                         }
                     },
-                    "422": {
+                    "400": {
                         "description": "Bad request"
                     }
                 }
             }
         },
-        "/api/v1/post/{id}": {
+        "/api/v1/post/{postId}": {
             "get": {
                 "tags": [
                     "Post"
@@ -80,7 +80,7 @@
                 "operationId": "getPostDetail",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "postId",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -104,6 +104,53 @@
                     }
                 }
             },
+            "put": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Update post detail",
+                "description": "Return a updated post detail",
+                "operationId": "updatePostDetail",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Updated user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePostRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Updated post",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Post"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Not found post"
+                    }
+                }
+            },
             "delete": {
                 "tags": [
                     "Post"
@@ -113,7 +160,7 @@
                 "operationId": "deletePost",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "postId",
                         "in": "path",
                         "description": "Post id",
                         "required": true,
@@ -177,7 +224,7 @@
                 }
             },
             "StorePostRequest": {
-                "title": "Store post request",
+                "title": "StorePostRequest",
                 "description": "Store post request body data",
                 "required": [
                     "title",
